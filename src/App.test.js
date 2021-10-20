@@ -1,13 +1,27 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import InitialView from './components/InitialView';
 
 //enzyme imports
-import {configure, shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow} from 'enzyme';
+import Loading from './components/Loading';
+import Coins from './components/Coins';
 
-configure({ adapter: new Adapter() });
 
-test('renders learn react link', () => {
-  const wrapper = shallow(<App/>)
-  expect(wrapper.find('a').text()).toContain("Learn React")
-});
+describe('App Test Cases', ()=>{
+  it('renders App', () => {
+    const wrapper = shallow(<App/>)
+    expect(wrapper).toBeDefined();
+  });
+  it('Loads Views',()=>{
+    const wrapper = shallow(<App/>)
+    const initialView = wrapper.find(<InitialView/>)
+    expect(initialView).toBeDefined()
+    const loading  = wrapper.find(<Loading/>)
+    expect(loading).toBeDefined()
+    const coins  = wrapper.find(<Coins/>)
+    expect(coins).toBeDefined()
+  })
+
+})
+
